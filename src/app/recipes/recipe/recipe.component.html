@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col">
+  </div>
+  <div class="col-10">
+    <form [formGroup]="recipeForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" formControlName="name" aria-describedby="name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" formControlName="description">
+      </div>
+      <div class="form-group">
+        <label for="source">Source</label>
+        <input class="form-control" formControlName="source">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <my-typeahead formControlName="category" [data]="categories" displayVal="name" submitVal="id"></my-typeahead>
+      </div>
+      <div class="form-group" *ngIf="recipeForm.controls.category.value">
+        <label for="category">Subcategory</label>
+        <my-typeahead formControlName="subcategory" [data]="categories" displayVal="name" submitVal="id"></my-typeahead>
+      </div>
+      <div *ngFor="let ingredient of recipeForm.controls['ingredients'].controls; let i = index" >
+        <label for="ingredients">Ingredients</label>
+        <div [formGroup]="ingredient" class="row">
+          <div class="form-group col-sm">
+            <label for="name">Name</label>
+            <input class="form-control" formControlName="name" aria-describedby="name">
+          </div>
+          <div class="form-group col-sm">
+            <label for="amount">Amount</label>
+            <input class="form-control" formControlName="amount" aria-describedby="amount">
+          </div>
+          <div class="col-sm">
+            <button class="btn btn-danger remove-ingredient" (click)="removeIngredient(i)">
+              <fa-icon icon="times"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="addIngredient()">Add ingredient</button>
+    </form>
+  </div>
+  <div class="col">
+  </div>
+</div>

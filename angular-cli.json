@@ -49,7 +49,7 @@
     }
   },
   "defaults": {
-    "styleExt": "less",
+    "styleExt": "css",
     "prefixInterfaces": false,
     "inline": {
       "style": false,
