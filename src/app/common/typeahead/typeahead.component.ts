@@ -19,8 +19,7 @@ export class MyTypeaheadComponent implements ControlValueAccessor, OnInit {
   @Input() data: any[];
   @Input() displayVal;
   @Input() submitVal;
-
-  @Input('value') _value = false;
+  @Input('value') _value;
   onChange: any = () => { };
   onTouched: any = () => { };
 
@@ -30,7 +29,6 @@ export class MyTypeaheadComponent implements ControlValueAccessor, OnInit {
   }
 
   get value() {
-    console.log('get value', this._value);
     return this._value;
   }
 
@@ -55,7 +53,6 @@ export class MyTypeaheadComponent implements ControlValueAccessor, OnInit {
 
   //this is how we write the value we want to the formControl
   writeValue(value) {
-    console.log('writing value', value);
     this.value = value;
   }
 
@@ -83,6 +80,9 @@ export class MyTypeaheadComponent implements ControlValueAccessor, OnInit {
     this.onChange(ev.item[this.submitVal]);
     if (this.submitVal) {
       this.writeValue(ev.item[this.submitVal]);
+    }
+    else {
+      this.writeValue(null);
     }
   }
 

@@ -11,24 +11,22 @@ library.add(faTimes);
 
 import {AppRoutingModule} from './app-router.module';
 
+import { NavComponent } from './nav/nav.component';
+import { AppComponent } from './app.component';
+
 import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { RecipesService } from './recipes/recipes.service';
 
-import { RecipeComponent } from './recipes/recipe/recipe.component';
-import { NavComponent } from './nav/nav.component';
-
-import { MyTypeaheadComponent } from './common/typeahead/typeahead.component';
-import { AppComponent } from './app.component';
 import { MealsComponent } from './meals/meals.component';
 import { MealComponent } from './meals/meal/meal.component';
-
+import { CommonModule } from './common/common.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipesComponent,
     RecipeComponent,
-    MyTypeaheadComponent,
     NavComponent,
     MealsComponent,
     MealComponent
@@ -40,7 +38,8 @@ import { MealComponent } from './meals/meal/meal.component';
     HttpModule,
     TypeaheadModule.forRoot(),
     FontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule
   ],
   providers: [
     RecipesService

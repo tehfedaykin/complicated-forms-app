@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable, of, from } from 'rxjs';
+
+import { filter } from 'rxjs/operators';
+
 
 @Injectable()
 export class RecipesService {
 
   constructor() { }
 
-  getRecipes() { 
-    return [
+  getRecipes(): Observable <any>  {
+    return of([
       {
         id: 1,
         name: 'Taco Bowl',
         description: 'yummy taco bowl',
         source: 'my head',
-        category: 'breakfast',
-        subcategory: 'keto',
+        category: 1,
+        subcategory: [2],
         ingredients: [
           {
             name: 'ground beef',
@@ -31,8 +34,8 @@ export class RecipesService {
         name: 'Greek Chicken Bowl',
         description: 'yummy taco bowl',
         source: 'my head',
-        category: 'breakfast',
-        subcategory: 'keto',
+        category: 2,
+        subcategory: [2, 4],
         ingredients: [
           {
             name: 'ground beef',
@@ -44,28 +47,15 @@ export class RecipesService {
           }
         ]
       }
-    ]
+    ])
   }
 
-  getRecipe(id: string) {
-    return {
-      id: 2,
-      name: 'Greek Chicken Bowl',
-      description: 'yummy taco bowl',
-      source: 'my head',
-      category: 'breakfast',
-      subcategory: 'keto',
-      ingredients: [
-        {
-          name: 'ground beef',
-          amount: '4 oz'
-        },
-        {
-          name: 'tomatos',
-          amount: '3 oz'
-        }
-      ]
-    }
+  getRecipe(id: number): Observable <any> {
+    let recipe;
+    this.getRecipes().subscribe((response: any) => {
+      recipe = response.filter(recipe => recipe['id'] === id)[0];
+    });
+    return recipe
   }
 
 }
