@@ -97,11 +97,6 @@ export class RecipeComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
       this.recipe = this.recipesService.getRecipe(id);
-      // this.recipesService.getRecipe(id).subscribe((recipe) => {
-      //   this.recipe = recipe;
-      //   console.log('merp', this.recipe);
-      //
-      // });
       this.setFormValues(this.recipe);
     }
     else {
