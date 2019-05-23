@@ -114,27 +114,27 @@ export class RecipeComponent implements OnInit {
 
   createForm() {
     this.recipeForm = this.fb.group({
-      name: [null, Validators.required],
-      description: [null],
-      source: [null],
-      category: [null],
-      subcategory: [[]],
+      name: [{value: null, disabled: false}, Validators.required],
+      description: [{value: null, disabled: false}],
+      source: [{value: null, disabled: false}],
+      category: [{value: null, disabled: false}],
+      subcategory: [{value: [], disabled: false}],
       ingredients: this.fb.array([]),
-      calories: [null, [Validators.required, this.amountValidator]]
+      calories: [{value: null, disabled: false}, [Validators.required, this.amountValidator]]
     });
     this.onChanges();
   }
 
   setFormValues(data) {
     this.recipeForm = this.fb.group({
-      name: [data.name ? data.name : null, Validators.required],
-      description: [data.description ? data.description :  null],
-      source: [data.source ? data.source :  null],
-      category: [data.category ? data.category :  null],
-      subcategory: [data.subcategory ? data.subcategory : []],
+      name: [{value: data.name ? data.name : null, disabled: false}, Validators.required],
+      description: [{value: data.description ? data.description : null, disabled: false}, Validators.required],
+      source: [{value: data.source ? data.source : null, disabled: false}],
+      category: [{value: data.category ? data.category : null, disabled: false}],
+      subcategory: [{value: data.subcategory ? data.subcategory : [], disabled: false}],
       ingredients: this.fb.array([]),
-      calories: [data.calories, Validators.required, this.amountValidator]
-    });
+      calories: [{value: data.calories, disabled: false}, Validators.required, this.amountValidator]
+    })
 
     const arrayControl = <FormArray>this.recipeForm.controls['ingredients'];
     data.ingredients.forEach(item => {
@@ -142,7 +142,7 @@ export class RecipeComponent implements OnInit {
         name: [item.name, [Validators.required]],
         amount: [item.amount, [Validators.required]]
       });
-      arrayControl.push(newGroup);
+      arrayControl.insert(arrayControl.length, newGroup);
     });
   }
 
@@ -203,7 +203,7 @@ export class RecipeComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [Validators.required])
     });
-    ingredientsFormArray.push(ingredientFormGroup);
+    ingredientsFormArray.insert(ingredientsFormArray.length, ingredientFormGroup);
   }
 
   public removeIngredient(i) {

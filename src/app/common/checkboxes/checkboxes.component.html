@@ -1,9 +1,9 @@
 <ng-container *ngFor="let item of data">
   <div class="form-check form-check-inline">
-    <ng-container *ngIf="value && value.includes(item.id)">
+    <ng-container *ngIf="_value && _value.includes(item.id)">
       <input class="form-check-input" type="checkbox" value="{{item.id}}" checked (click)=removeCheckbox(item.id)>
     </ng-container>
-    <ng-container *ngIf="!value || !value.includes(item.id)">
+    <ng-container *ngIf="!_value || !_value.includes(item.id)">
       <input class="form-check-input" type="checkbox" value="{{item.id}}" (click)=selectCheckbox(item.id)>
     </ng-container>
     <label class="form-check-label" >{{item.name}}</label>

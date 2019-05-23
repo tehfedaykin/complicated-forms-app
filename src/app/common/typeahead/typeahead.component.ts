@@ -19,7 +19,7 @@ export class MyTypeaheadComponent implements ControlValueAccessor, OnInit {
   @Input() data: any[];
   @Input() displayVal;
   @Input() submitVal;
-  @Input('value') _value;
+  public _value;
   onChange: any = () => { };
   onTouched: any = () => { };
 
